@@ -37,7 +37,7 @@ jobs:
       - name: Run Front-end tests
         working-directory: front
         run: |
-          ng test
+          ng test -- --browsers ChromeHeadless --no-watch
 
       - name: Build Front-end Docker container
         working-directory: front
