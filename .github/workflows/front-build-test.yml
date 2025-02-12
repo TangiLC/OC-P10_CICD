@@ -1,0 +1,73 @@
+name: Frontend Build & Test
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - "front/**"
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - "front/**"
+
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: front
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+          cache: "npm"
+          cache-dependency-path: "front/package-lock.json"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Install Chrome browser for tests
+        run: |
+          wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+          sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google.list'
+          sudo apt-get update
+          sudo apt-get install -y google-chrome-stable
+
+      - name: Run tests with coverage
+        run: |
+          export CHROME_BIN=/usr/bin/google-chrome
+          npm test -- --browsers ChromeHeadless --watch=false --no-progress
+
+      - name: Test Report
+        uses: phoenix-actions/test-reporting@v8
+        id: test-report
+        with:
+          name: Frontend Tests
+          path: test-results/*.xml
+          reporter: jest-junit
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: front-coverage-report
+          path: coverage/bobapp
+
+      - name: Build Docker image
+        run: docker build -t bobapp-front .
+
+      - name: Save Docker image
+        run: docker save bobapp-front > bobapp-front.tar
+
+      - name: Upload Docker image
+        uses: actions/upload-artifact@v4
+        with:
+          name: frontend-docker-image
+          path: bobapp-front.tar

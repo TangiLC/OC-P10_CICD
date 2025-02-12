@@ -1,0 +1,61 @@
+name: Backend Build & Test
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - "back/**"
+  pull_request:
+    branches: [main, develop]
+    paths:
+      - "back/**"
+
+permissions:
+  contents: read
+  checks: write
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: back
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Java & Maven
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+          cache: "maven"
+
+      - name: Build and test
+        run: mvn clean verify
+
+      - name: Test Report
+        uses: phoenix-actions/test-reporting@v8
+        id: test-report
+        with:
+          name: Backend Tests
+          path: target/surefire-reports/*.xml
+          reporter: java-junit
+
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: back-coverage-report
+          path: target/site/jacoco/
+
+      - name: Build Docker image
+        run: docker build -t bobapp-back .
+
+      - name: Save Docker image
+        run: docker save bobapp-back > bobapp-back.tar
+
+      - name: Upload Docker image
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-docker-image
+          path: bobapp-back.tar
