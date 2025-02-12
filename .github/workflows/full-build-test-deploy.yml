@@ -47,7 +47,7 @@ jobs:
         if: success() || failure()    
         with:
           name: Frontend Tests
-          path: front/karma-results.json
+          path: front/coverage/bobapp/karma-results.json
           reporter: karma-json
       - name: Upload front-end coverage report
         uses: actions/upload-artifact@v4
