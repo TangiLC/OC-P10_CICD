@@ -40,7 +40,7 @@ module.exports = function (config) {
     },
     junitReporter: {
       outputDir: require('path').join(__dirname, './coverage/bobapp'),
-      outputFile: 'karma-junit-results.xml',
+      outputFile: 'test-results.xml',
       useBrowserName: false
     },
 
