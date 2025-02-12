@@ -30,18 +30,18 @@ jobs:
           node-version: "18"
 
       - name: Install Front-end dependencies
+        working-directory: front
         run: |
-          cd front
           npm install
 
       - name: Run Front-end tests
+        working-directory: front
         run: |
-          cd front
-          npm test
+          ng test
 
       - name: Build Front-end Docker container
+        working-directory: front
         run: |
-          cd front
           docker build -t bobapp-front .
 
       - name: Run Front-end container
