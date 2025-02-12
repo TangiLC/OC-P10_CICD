@@ -2,12 +2,9 @@ name: Frontend Build & Test
 on:
   push:
     branches: [main, develop]
-    paths:
-      - "front/**"
+
   pull_request:
     branches: [main, develop]
-    paths:
-      - "front/**"
 
 permissions:
   contents: read

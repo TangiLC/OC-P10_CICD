@@ -2,12 +2,9 @@ name: Backend Build & Test
 on:
   push:
     branches: [main, develop]
-    paths:
-      - "back/**"
+
   pull_request:
     branches: [main, develop]
-    paths:
-      - "back/**"
 
 permissions:
   contents: read
@@ -33,7 +30,7 @@ jobs:
 
       - name: Build and test
         run: |
-          mvn clean verify 
+          mvn clean verify
 
       - name: List test reports
         run: |
@@ -42,16 +39,16 @@ jobs:
           cat target/surefire-reports/*.xml || echo "No XML files found"
 
       - name: Test Report
-        if: success() || failure() 
+        if: success() || failure()
         uses: phoenix-actions/test-reporting@v8
         with:
           name: Backend Tests
-          path: "**/surefire-reports/*.xml" 
+          path: "**/surefire-reports/*.xml"
           reporter: java-junit
-          fail-on-error: false 
+          fail-on-error: false
 
       - name: Upload coverage report
-        if: success() || failure() 
+        if: success() || failure()
         uses: actions/upload-artifact@v4
         with:
           name: back-coverage-report
