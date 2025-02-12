@@ -1,0 +1,74 @@
+name: Build, Test and Deploy BobApp
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+  pull_request:
+    branches:
+      - main
+      - develop
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      docker:
+        image: docker:dind
+        options: --privileged
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # FRONT-END
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "18"
+
+      - name: Install Front-end dependencies
+        run: |
+          cd front
+          npm install
+
+      - name: Run Front-end tests
+        run: |
+          cd front
+          npm test
+
+      - name: Build Front-end Docker container
+        run: |
+          cd front
+          docker build -t bobapp-front .
+
+      - name: Run Front-end container
+        run: |
+          docker run -p 8080:8080 --name bobapp-front -d bobapp-front
+
+      # BACK-END
+      - name: Set up Java & Maven
+        uses: actions/setup-java@v3
+        with:
+          distribution: "temurin"
+          java-version: "17"
+
+      - name: Install Back-end dependencies & Run tests
+        run: |
+          cd back
+          mvn clean install
+
+      - name: Build Back-end Docker container
+        run: |
+          cd back
+          docker build -t bobapp-back .
+
+      - name: Run Back-end container
+        run: |
+          docker run -p 8081:8080 --name bobapp-back -d bobapp-back
+
+      # Final Step: Display running containers
+      - name: List running containers
+        run: docker ps
