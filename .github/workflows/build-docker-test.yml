@@ -45,13 +45,13 @@ jobs:
         working-directory: front
         run: |
           export CHROME_BIN=/usr/bin/google-chrome
-          npm test -- --browsers ChromeHeadless --watch=false --code-coverage --no-progress
+          npm test -- --browsers ChromeHeadless --watch=false --no-progress
 
       - name: Upload front-end coverage report
         uses: actions/upload-artifact@v4
         with:
           name: front-coverage-report
-          path: front/coverage/bobapp/
+          path: front/coverage/
 
       - name: Build Front-end Docker container
         working-directory: front
