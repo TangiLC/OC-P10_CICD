@@ -40,7 +40,7 @@ jobs:
         working-directory: front
         run: |
           export CHROME_BIN=/usr/bin/google-chrome
-          npm test -- --browsers ChromeHeadless --watch=false --no-progress
+          npm test -- --browsers ChromeHeadless --watch=false --code-coverage --karma-config karma.conf.js
       - name: Frontend Test Report
         uses: phoenix-actions/test-reporting@v8
         id: front-test-report
