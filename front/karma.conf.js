@@ -1,6 +1,8 @@
 // Karma configuration file, see link for more information
 // https://karma-runner.github.io/1.0/config/configuration-file.html
 
+const { type } = require('os')
+
 module.exports = function (config) {
   config.set({
     basePath: '',
@@ -27,10 +29,7 @@ module.exports = function (config) {
     coverageReporter: {
       dir: require('path').join(__dirname, './coverage/bobapp'),
       subdir: '.',
-      reporters: [
-        { type: 'html' },
-        { type: 'text-summary' }
-      ]
+      reporters: [{ type: 'html' }, { type: 'text-summary' }, { type: 'lcov' }]
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,
@@ -40,5 +39,5 @@ module.exports = function (config) {
     browsers: ['ChromeHeadless'],
     singleRun: true,
     restartOnFileChange: true
-  });
-};
+  })
+}

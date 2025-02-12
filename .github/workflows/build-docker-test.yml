@@ -41,10 +41,17 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y google-chrome-stable
 
-      - name: Run Front-end tests
+      - name: Run Front-end tests with coverage
         working-directory: front
         run: |
+          export CHROME_BIN=/usr/bin/google-chrome
           npm test -- --browsers ChromeHeadless --watch=false --no-progress
+
+      - name: Upload front-end coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          name: front-coverage-report
+          path: front/coverage/
 
       - name: Build Front-end Docker container
         working-directory: front
@@ -62,10 +69,17 @@ jobs:
           distribution: "temurin"
           java-version: "17"
 
-      - name: Install Back-end dependencies & Run tests
+      - name: Install Back-end dependencies & Run tests with coverage
         run: |
           cd back
-          mvn clean install
+          mvn clean verify
+      
+      - name: Upload back-end coverage report
+        uses: actions/upload-artifact@v3
+        with:
+          name: back-coverage-report
+          path: back/target/site/jacoco/
+
 
       - name: Build Back-end Docker container
         run: |
