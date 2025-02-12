@@ -49,19 +49,7 @@ jobs:
         working-directory: front
         run: |
           export CHROME_BIN=/usr/bin/google-chrome
-<<<<<<< HEAD
           npm test -- --browsers ChromeHeadless --watch=false --no-progress
-=======
-          npm test -- --browsers ChromeHeadless --watch=false --code-coverage --karma-config karma.conf.js
-
-      - name: Test Report - Frontend
-        uses: dorny/test-reporter@v1
-        if: success() || failure()    
-        with:
-          name: Frontend Tests       
-          path: front/karma-results.json 
-          reporter: karma-json        
->>>>>>> 6d6cb25c55dc74a89df7b1df204e739af5a74c81
 
       - name: Upload front-end coverage report
         uses: actions/upload-artifact@v4
@@ -88,22 +76,13 @@ jobs:
       - name: Install Back-end dependencies & Run tests with coverage
         run: |
           cd back
-          mvn clean verify surefire-report:report-only
-
-      - name: Test Report - Backend
-        uses: dorny/test-reporter@v1
-        if: success() || failure()
-        with:
-          name: Backend Tests
-          path: back/target/surefire-reports/*.xml
-          reporter: java-junit
+          mvn clean verify
       
       - name: Upload back-end coverage report
         uses: actions/upload-artifact@v4
         with:
           name: back-coverage-report
           path: back/target/site/jacoco/
-
 
       - name: Build Back-end Docker container
         run: |
