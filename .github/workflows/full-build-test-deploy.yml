@@ -44,10 +44,11 @@ jobs:
       - name: Frontend Test Report
         uses: phoenix-actions/test-reporting@v8
         id: front-test-report
+        if: success() || failure()    
         with:
           name: Frontend Tests
-          path: front/test-results/*.xml
-          reporter: jest-junit
+          path: front/karma-results.json
+          reporter: karma-json
       - name: Upload front-end coverage report
         uses: actions/upload-artifact@v4
         with:
@@ -73,6 +74,7 @@ jobs:
       - name: Backend Test Report
         uses: phoenix-actions/test-reporting@v8
         id: back-test-report
+        if: success() || failure()    
         with:
           name: Backend Tests
           path: back/target/surefire-reports/*.xml
