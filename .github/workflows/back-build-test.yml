@@ -32,21 +32,36 @@ jobs:
           cache: "maven"
 
       - name: Build and test
-        run: mvn clean verify
+        run: |
+          mvn clean verify -Dsurefire.useFile=true
+
+      # S'assurer que les rapports existent
+      - name: List test reports
+        run: |
+          ls -la target/surefire-reports/
+          echo "Test reports content:"
+          cat target/surefire-reports/*.xml || echo "No XML files found"
 
       - name: Test Report
+        if: success() || failure() # Exécuter même si les tests échouent
         uses: phoenix-actions/test-reporting@v8
-        id: test-report
         with:
           name: Backend Tests
-          path: target/surefire-reports/*.xml
+          path: "**/surefire-reports/*.xml" # Chemin plus générique
           reporter: java-junit
+          fail-on-error: false # Ne pas échouer si pas de rapports
 
       - name: Upload coverage report
+        if: success() || failure() # Exécuter même si les tests échouent
         uses: actions/upload-artifact@v4
         with:
           name: back-coverage-report
           path: target/site/jacoco/
+
+      - name: Set build status
+        id: build
+        run: |
+          echo "status=success" >> $GITHUB_OUTPUT
 
       - name: Build Docker image
         run: docker build -t bobapp-back .
@@ -59,3 +74,8 @@ jobs:
         with:
           name: backend-docker-image
           path: bobapp-back.tar
+
+      - name: Set final status
+        if: always()
+        run: |
+          echo "final_status=${{ steps.build.outputs.status }}" >> $GITHUB_OUTPUT
