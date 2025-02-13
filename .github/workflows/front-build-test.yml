@@ -1,5 +1,5 @@
 name: Frontend Build and Test
-run-name: ${{ github.actor }} | Frontend CI
+run-name: ${{ github.actor }} | Frontend Build +Test
 
 on:
   push:

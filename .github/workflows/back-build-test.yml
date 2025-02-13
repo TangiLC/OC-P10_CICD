@@ -1,5 +1,5 @@
 name: Backend Build and Test
-run-name: ${{ github.actor }} | Backend CI
+run-name: ${{ github.actor }} | Backend Build +Test
 
 on:
   push:

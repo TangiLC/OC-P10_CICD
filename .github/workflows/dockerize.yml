@@ -1,5 +1,5 @@
 name: Docker Build and Run
-run-name: ${{ github.actor }} | Docker CI
+run-name: ${{ github.actor }} | Docker Front-Back
 
 on:
   push:

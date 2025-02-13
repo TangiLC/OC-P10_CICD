@@ -1,5 +1,5 @@
 name: Code scanning | BobApp Project
-run-name: ${{ github.actor }} | Code Analysis
+run-name: ${{ github.actor }} | Code Validation (Java, TS)
 
 on:
   push:

@@ -1,5 +1,5 @@
 name: SonarCloud | Backend BobApp
-run-name: ${{ github.actor }} | SonarCloud Backend Analysis
+run-name: ${{ github.actor }} | SonarCloud Analysis
 
 on:
   push:
