@@ -10,16 +10,14 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'back/**'
-      - 'front/**'
+      - develop
+   
 
   pull_request:
     branches:
       - main
-    paths:
-      - 'back/**'
-      - 'front/**'
+      - develop
+   
 
 jobs:
   analyze:
