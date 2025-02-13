@@ -1,4 +1,5 @@
 name: Build, Test and Deploy BobApp
+run-name: ${{ github.actor }} | Build, Test and Deploy
 on:
   push:
     branches:
