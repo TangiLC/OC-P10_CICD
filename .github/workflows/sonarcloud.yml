@@ -81,6 +81,7 @@ jobs:
           mvn -B -f back/pom.xml verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
           -Dsonar.projectKey=TangiLC_OC-P10_CICD \
           -Dsonar.organization=tangilecadre \
+          -Dsonar.host.url=https://sonarcloud.io \
           -Dsonar.qualitygate.wait=true \
           -Dsonar.sources=back/src/main/java,front/src \
           -Dsonar.tests=back/src/test/java,front/src/app \
