@@ -1,5 +1,6 @@
 [![Coverage Status](https://coveralls.io/repos/github/TangiLC/OC-P10_CICD/badge.svg?branch=main)](https://coveralls.io/github/TangiLC/OC-P10_CICD?branch=main)
 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=TangiLC_OC-P10_CICD&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=TangiLC_OC-P10_CICD)
 
 # BobApp
 
