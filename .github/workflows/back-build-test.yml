@@ -15,6 +15,8 @@ on:
 jobs:
   backend-build-test:
     runs-on: ubuntu-latest
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
     steps:
       - name: Checkout repository
@@ -46,7 +48,6 @@ jobs:
           name: back-coverage-report
           path: back/target/site/jacoco/
 
-
       - name: Publish coverage to Coveralls
         uses: coverallsapp/github-action@v2
         with:
@@ -55,3 +56,11 @@ jobs:
           format: jacoco
           flag-name: backend
 
+      - name: Analyse avec SonarCloud
+        run: |
+          cd back
+          mvn sonar:sonar \
+            -Dsonar.token=$SONAR_TOKEN \
+            -Dsonar.projectKey=TangiLC_OC-P10_CICD \
+            -Dsonar.organization=tangilc \
+            -Dsonar.host.url=https://sonarcloud.io
