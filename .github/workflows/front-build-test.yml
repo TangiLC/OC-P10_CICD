@@ -64,3 +64,4 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: front/coverage/bobapp/lcov.info
           flag-name: frontend
+
