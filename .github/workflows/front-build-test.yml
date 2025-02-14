@@ -65,11 +65,14 @@ jobs:
           flag-name: frontend
 
       - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v1
+        uses: SonarSource/sonarcloud-github-action@v2
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         with:
           projectBaseDir: front
           args: >
             -Dsonar.projectKey=TangiLC_OC-P10_CICD
             -Dsonar.organization=tangilc
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+            -Dsonar.sources=src
+            -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/test.ts,**/karma.conf.js
+            -Dsonar.javascript.lcov.reportPaths=coverage/bobapp/lcov.info
