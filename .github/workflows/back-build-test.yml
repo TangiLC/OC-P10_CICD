@@ -45,3 +45,13 @@ jobs:
         with:
           name: back-coverage-report
           path: back/target/site/jacoco/
+
+
+      - name: Publish coverage to Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          file: back/target/site/jacoco/jacoco.xml
+          format: jacoco
+          flag-name: backend
+
