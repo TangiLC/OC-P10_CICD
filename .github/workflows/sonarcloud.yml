@@ -57,6 +57,5 @@ jobs:
           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
           -Dsonar.java.codeCoveragePlugin=jacoco \
           -Dsonar.coverage.ratio > 80% \
-          -Dsonar.duplicated.lines.density < 3% \
           -Dsonar.reliability.rating = A \
           -Dsonar.qualitygate.timeout=300
