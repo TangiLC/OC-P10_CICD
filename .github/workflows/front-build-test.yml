@@ -57,3 +57,9 @@ jobs:
         with:
           name: front-coverage-report
           path: front/coverage/bobapp
+
+      - name: Publish coverage to Coveralls
+        uses: coverallsapp/github-action@v2
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          path-to-lcov: front/coverage/bobapp/lcov.info

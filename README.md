@@ -1,3 +1,6 @@
+[![Coverage Status](https://coveralls.io/repos/github/TangiLC/OC-P10_CICD/badge.svg?branch=main)](https://coveralls.io/github/TangiLC/OC-P10_CICD?branch=main)
+
+
 # BobApp
 
 Clone project:
