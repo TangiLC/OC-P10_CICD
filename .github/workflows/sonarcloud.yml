@@ -86,7 +86,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         working-directory: back
         run: |
-          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          mvn -B clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          -Dsonar.login=$SONAR_TOKEN \
           -Dsonar.projectKey=TangiLC_OC-P10_CICD \
           -Dsonar.organization=tangilc \
           -Dsonar.host.url=https://sonarcloud.io \
@@ -97,5 +98,6 @@ jobs:
           -Dsonar.java.binaries=target/classes \
           -Dsonar.java.test.binaries=target/test-classes \
           -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
+          -Dsonar.testExecutionReportPaths=target/surefire-reports \
           -Dsonar.test.inclusions=**/*.spec.ts,**/*Test.java \
-          -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts
+          -Dsonar.exclusions=**/node_modules/**
