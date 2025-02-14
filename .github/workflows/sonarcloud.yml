@@ -50,4 +50,13 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
           cd back
-          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=TangiLC_OC-P10_CICD
+          mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar \
+          -Dsonar.projectKey=TangiLC_OC-P10_CICD \
+          -Dsonar.qualitygate.wait=true \
+          -Dsonar.coverage.exclusions=**/*Application.java \
+          -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
+          -Dsonar.java.codeCoveragePlugin=jacoco \
+          -Dsonar.coverage.ratio > 80% \
+          -Dsonar.duplicated.lines.density < 3% \
+          -Dsonar.reliability.rating = A \
+          -Dsonar.qualitygate.timeout=300
