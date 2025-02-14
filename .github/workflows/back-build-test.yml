@@ -52,3 +52,4 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           file: back/target/site/jacoco/jacoco.xml
           format: jacoco
+          flag-name: backend
