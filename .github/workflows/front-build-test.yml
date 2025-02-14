@@ -6,12 +6,11 @@ on:
     branches:
       - main
       - develop
-    
+
   pull_request:
     branches:
       - main
       - develop
-   
 
 jobs:
   frontend-build-test:
@@ -46,7 +45,7 @@ jobs:
       - name: Frontend Test Report
         uses: phoenix-actions/test-reporting@v14
         id: front-test-report
-        if: success() || failure()    
+        if: success() || failure()
         with:
           name: Frontend Tests
           path: front/coverage/bobapp/test-results.xml
@@ -65,3 +64,12 @@ jobs:
           path-to-lcov: front/coverage/bobapp/lcov.info
           flag-name: frontend
 
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@v1
+        with:
+          args: >
+            -Dsonar.projectKey=TangiLC_OC-P10_CICD
+            -Dsonar.organization=tangilc
+            -Dsonar.host.url=https://sonarcloud.io
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
