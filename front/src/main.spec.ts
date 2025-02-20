@@ -1,18 +1,20 @@
-import { enableProdMode, NgModuleRef } from '@angular/core';
+import * as angularCore from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import { AppModule } from './app/app.module';
 import { environment } from './environments/environment';
+import { core } from '@angular/compiler';
 
 describe('main.ts', () => {
   let enableProdModeSpy: jasmine.Spy;
   let bootstrapModuleSpy: jasmine.Spy;
 
   beforeEach(() => {
-    enableProdModeSpy = spyOn(console, 'error');
+    const mockNgModuleRef = {} as angularCore.NgModuleRef<unknown>;
+    enableProdModeSpy = spyOn(angularCore, 'enableProdMode');
     bootstrapModuleSpy = spyOn(
       platformBrowserDynamic(),
       'bootstrapModule'
-    ).and.callFake(() => Promise.resolve({} as NgModuleRef<any>));
+    ).and.returnValue(Promise.resolve(mockNgModuleRef));
   });
 
   afterEach(() => {
@@ -20,22 +22,24 @@ describe('main.ts', () => {
     bootstrapModuleSpy.calls.reset();
   });
 
-  it('should enable production mode if environment is production', () => {
+  it('should enable production mode if environment is production', async () => {
     (environment as any).production = true;
-    require('./main');
 
-    expect(enableProdMode).toHaveBeenCalled();
+    await import('./main');
+
+    expect(enableProdModeSpy).toHaveBeenCalled();
   });
 
-  it('should not enable production mode if environment is not production', () => {
+  it('should not enable production mode if environment is not production', async () => {
     (environment as any).production = false;
-    require('./main');
 
-    expect(enableProdMode).not.toHaveBeenCalled();
+    await import('./main');
+
+    expect(enableProdModeSpy).not.toHaveBeenCalled();
   });
 
-  it('should bootstrap AppModule', () => {
-    require('./main');
+  it('should bootstrap AppModule', async () => {
+    await import('./main');
 
     expect(bootstrapModuleSpy).toHaveBeenCalledWith(AppModule);
   });
@@ -43,12 +47,12 @@ describe('main.ts', () => {
   it('should log an error if bootstrap fails', async () => {
     const error = new Error('Bootstrap error');
     bootstrapModuleSpy.and.returnValue(Promise.reject(error));
+    const consoleErrorSpy = spyOn(console, 'error');
 
     try {
-      require('./main');
-      await new Promise((resolve) => setTimeout(resolve, 0));
+      await import('./main');
     } catch {}
 
-    expect(console.error).toHaveBeenCalledWith(error);
+    expect(consoleErrorSpy).toHaveBeenCalledWith(error);
   });
 });
