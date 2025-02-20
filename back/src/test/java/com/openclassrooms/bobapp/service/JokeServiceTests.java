@@ -16,19 +16,18 @@ import org.mockito.MockitoAnnotations;
 class JokeServiceTest {
 
   @Mock
-  private JsonReader jsonReader; // Mock de JsonReader
+  private JsonReader jsonReader;
 
   @InjectMocks
-  private JokeService jokeService; // Injecte le mock dans JokeService
+  private JokeService jokeService;
 
   @BeforeEach
   void setUp() {
-    MockitoAnnotations.openMocks(this); // Initialise les mocks avant chaque test
+    MockitoAnnotations.openMocks(this);
   }
 
   @Test
   void testGetRandomJoke() {
-    // Création d'une liste de blagues simulée
     List<Joke> mockJokes = Arrays.asList(
       new Joke("C'est l'histoire du ptit dej, tu la connais ?", "Pas de bol."),
       new Joke("C'est l'histoire d'une blague vaseuse", "Mets tes bottes."),
@@ -38,30 +37,22 @@ class JokeServiceTest {
       )
     );
 
-    // Simulation du comportement de jsonReader.getJokes()
     when(jsonReader.getJokes()).thenReturn(mockJokes);
 
-    // Exécution du service
     Joke randomJoke = jokeService.getRandomJoke();
 
-    // Vérifications
-    assertNotNull(randomJoke, "La blague retournée ne doit pas être null");
-    assertTrue(
-      mockJokes.contains(randomJoke),
-      "La blague doit être issue de la liste simulée"
-    );
+    assertNotNull(randomJoke, "Returned joke is not null");
+    assertTrue(mockJokes.contains(randomJoke), "Returned joke belongs to list");
 
-    // Vérifie que getJokes() a été appelé une seule fois
     verify(jsonReader, times(1)).getJokes();
   }
 
   @Test
   void testGetRandomJokeWithOneJoke() {
-    // Simule une liste contenant une seule blague
     List<Joke> singleJokeList = List.of(
       new Joke(
-        "Pourquoi les plongeurs plongent-ils toujours en arrière ?",
-        "Parce que sinon, ils tombent dans le bateau."
+        "Que fait un geek quand il descend du métro ?",
+        "Il libère la RAM"
       )
     );
 
@@ -71,13 +62,10 @@ class JokeServiceTest {
 
     assertNotNull(randomJoke);
     assertEquals(
-      "Pourquoi les plongeurs plongent-ils toujours en arrière ?",
+      "Que fait un geek quand il descend du métro ?",
       randomJoke.getJoke()
     );
-    assertEquals(
-      "Parce que sinon, ils tombent dans le bateau.",
-      randomJoke.getResponse()
-    );
+    assertEquals("Il libère la RAM", randomJoke.getResponse());
 
     verify(jsonReader, times(1)).getJokes();
   }

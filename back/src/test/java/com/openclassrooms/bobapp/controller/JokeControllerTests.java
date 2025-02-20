@@ -28,8 +28,8 @@ class JokeControllerTest {
   @Test
   void testGetRandomJokes_CallsJokeService() {
     Joke mockJoke = new Joke(
-      "Pourquoi les plongeurs plongent-ils toujours en arrière ?",
-      "Parce que sinon, ils tombent dans le bateau."
+      "Que fait un geek quand il descend du métro ?",
+      "Il libère la RAM"
     );
 
     when(jokeService.getRandomJoke()).thenReturn(mockJoke);
