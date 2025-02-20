@@ -93,26 +93,8 @@ jobs:
           name: back-coverage-report
           path: coverage/back
 
-      - name: Install LCOV tool
-        run: sudo apt-get install -y lcov
 
-      - name: Convert JaCoCo XML to LCOV
-        run: |
-          curl -o jacoco2lcov.py https://raw.githubusercontent.com/jacoco/jacoco/master/scripts/jacoco2lcov.py
-          python3 jacoco2lcov.py coverage/back/jacoco.xml --output coverage/back/jacoco.lcov
-
-      - name: Merge LCOV reports
-        run: |
-          lcov -a coverage/front/lcov.info -a coverage/back/jacoco.lcov -o coverage/merged-coverage.info
-          lcov --list coverage/merged-coverage.info
-
-      - name: Upload merged coverage report
-        uses: actions/upload-artifact@v4
-        with:
-          name: merged-coverage-report
-          path: coverage/merged-coverage.info
-
-      - name: SonarCloud Scan with Merged Coverage
+      - name: SonarCloud Scan with both Coverages
         env:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
@@ -123,3 +105,4 @@ jobs:
             -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/test.ts,**/karma.conf.js,**/environments/** \
             -Dsonar.coverage.exclusions=**/main.ts \
             -Dsonar.javascript.lcov.reportPaths=coverage/merged-coverage.info
+            -Dsonar.coverage.jacoco.xmlReportPaths=coverage/back/jacoco.xml
