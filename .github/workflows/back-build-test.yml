@@ -1,12 +1,11 @@
 name: Backend Build and Test
-run-name: ${{ github.actor }} | Backend Build +Test
+run-name: ${{ github.actor }} | Backend Build + Test
 
 on:
   push:
     branches:
       - main
       - develop
-
   pull_request:
     branches:
       - main
@@ -28,10 +27,17 @@ jobs:
           distribution: "temurin"
           java-version: "17"
 
-      - name: Install Back-end dependencies & Run tests with coverage
+      - name: Install back-end dependencies & Run tests with coverage
         run: |
           cd back
           mvn clean verify
+
+      - name: Archive test reports (JUnit)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-test-reports
+          path: back/target/surefire-reports/*.xml
 
       - name: Backend Test Report
         uses: phoenix-actions/test-reporting@v14
@@ -43,12 +49,14 @@ jobs:
           reporter: java-junit
 
       - name: Upload back-end coverage report
+        if: always()
         uses: actions/upload-artifact@v4
         with:
           name: back-coverage-report
           path: back/target/site/jacoco/
 
       - name: Publish coverage to Coveralls
+        if: always()
         uses: coverallsapp/github-action@v2
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
@@ -57,6 +65,7 @@ jobs:
           flag-name: backend
 
       - name: Analyse avec SonarCloud
+        if: always()
         run: |
           cd back
           mvn sonar:sonar \
