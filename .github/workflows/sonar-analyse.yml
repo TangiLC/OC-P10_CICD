@@ -1,5 +1,5 @@
-name: Full Build and Test
-run-name: ${{ github.actor }} | Full Build + Test
+name: Build and Test for Sonar Analyze
+run-name: ${{ github.actor }} | Full Build for Sonar Analyze
 
 on:
   push:
@@ -96,10 +96,10 @@ jobs:
       - name: Install LCOV tool
         run: sudo apt-get install -y lcov
 
-      - name: Convert JaCoCo XML to LCOV (using jacoco2lcov)
+      - name: Convert JaCoCo XML to LCOV
         run: |
-          npm install -g jacoco2lcov
-          jacoco2lcov coverage/back/jacoco.xml > coverage/back/jacoco.lcov
+          curl -o jacoco2lcov.py https://raw.githubusercontent.com/jacoco/jacoco/master/scripts/jacoco2lcov.py
+          python3 jacoco2lcov.py coverage/back/jacoco.xml --output coverage/back/jacoco.lcov
 
       - name: Merge LCOV reports
         run: |
