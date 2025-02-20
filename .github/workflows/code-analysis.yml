@@ -1,4 +1,4 @@
-name: Code scanning | BobApp Project
+name: Code scanning
 run-name: ${{ github.actor }} | Code Validation (Java, TS)
 
 on:

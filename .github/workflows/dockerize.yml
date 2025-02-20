@@ -4,8 +4,7 @@ run-name: ${{ github.actor }} | Docker Front-Back
 on:
   workflow_run:
     workflows:
-      - "Backend Build and Test"
-      - "Frontend Build and Test"
+      - "Code scanning"
     types: [completed]
 
 jobs:
