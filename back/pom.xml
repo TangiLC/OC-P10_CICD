@@ -56,7 +56,7 @@
 						</goals>
 						<configuration>
 							<excludes>
-								<exclude>com/openclassrooms/bobapp/BobappApplication</exclude>
+								
 								<exclude>com/openclassrooms/bobapp/model/**</exclude>
 							</excludes>
 						</configuration>
