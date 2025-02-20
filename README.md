@@ -1,66 +1,113 @@
-### Back-end
+# 🎭 BOBAPP - Application Full-Stack
+
+BOBAPP est une application full-stack permettant d'afficher une blague aléatoire par jour. Elle est développée avec un backend Java Spring Boot et un frontend Angular. Les deux parties sont conteneurisées avec Docker et intègrent un pipeline CI/CD via GitHub Actions.
+
+Ce projet est réalisé dans le cadre du cursus **Full-Stack Java Angular d'OpenClassrooms**, visant à implémenter une chaîne complète d'intégration continue (CI) et de déploiement continu (CD).
+
+![Java](https://img.shields.io/badge/Java-11%2B-orange?logo=coffeescript&logoColor=orange)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.5.4-green?logo=spring&logoColor=green)
+![Angular](https://img.shields.io/badge/Angular-14-red?logo=angular&logoColor=red)
+![JUnit5](https://img.shields.io/badge/Tested%20with-JUnit.5-green?logo=junit5&logoColor=green)
+![Jasmine](https://img.shields.io/badge/Tested%20with-Jasmine-blue?logo=jasmine&logoColor=blue)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/TangiLC/OC-P10_CICD/back-build-test.yml?branch=main)
+![Docker](https://img.shields.io/badge/Docker-available-blue?logo=docker)
+
+---
+
+## 📦 Architecture
+
+### **Backend (API REST)**
+- Langage : Java 11 avec Spring Boot 2.5.4
+- Endpoint principal : `GET /api/joke` – Renvoie une blague aléatoire
+- Tests : JUnit 5
+- Image Docker : `tangilecadre/bobapp-back`
+
+### **Frontend (SPA Angular)**
+- Framework : Angular 14
+- Interface : Single Page App (SPA)
+- Tests : Jasmine
+- Image Docker : `tangilecadre/bobapp-front`
+
+---
+
+## 🚀 Installation
+
+### **1. Installation locale (Développement)**
+
+#### **Backend**
+1. Cloner le projet :
+```bash
+git clone https://github.com/TangiLC/OC-P10_CICD.git
+cd back
+```
+2. Construire le projet :
+```bash
+mvn clean install
+```
+3. Lancer l'API :
+```bash
+mvn spring-boot:run
+```
+API disponible sur [http://localhost:8080](http://localhost:8080)
+
+#### **Frontend**
+1. Accéder au dossier `front` :
+```bash
+cd front
+```
+2. Installer les dépendances :
+```bash
+npm install
+```
+3. Lancer l'application Angular :
+```bash
+ng serve
+```
+Frontend accessible sur [http://localhost:4200](http://localhost:4200)
+
+### **2. Utilisation via Docker (Production)**
+
+#### **Backend**
+```bash
+docker pull tangilecadre/bobapp-back
+docker run -p 8081:8080 tangilecadre/bobapp-back
+```
+
+#### **Frontend**
+```bash
+docker pull tangilecadre/bobapp-front
+docker run -p 8080:80 tangilecadre/bobapp-front
+```
+
+L'application sera disponible sur [http://localhost:8080](http://localhost:8080)
+
+---
+
+## 🔍 CI/CD - GitHub Actions
+
+Des pipelines GitHub Actions assurent l'intégration et le déploiement continu :
+
+1. **Code Analysis** :
+   - Analyse statique pour Java (backend) et TypeScript (frontend)
+
+2. **Build & Test** :
+   - Compilation et tests unitaires (JUnit 5 et Jasmine)
+   - Rapport de couverture SonarCloud
+
+3. **Dockerize** :
+   - Construction des images Docker
+
+### **Rapports SonarCloud :**
+- [Backend - SonarCloud](https://sonarcloud.io/summary/overall?id=tangilc_OC-P10_CICD%3Aback&branch=main)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tangilc_OC-P10_CICD:back&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tangilc_OC-P10_CICD:back)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=tangilc_OC-P10_CICD:back&metric=coverage)](https://sonarcloud.io/summary/new_code?id=tangilc_OC-P10_CICD:back)
 
-### Front-end
+- [Frontend - SonarCloud](https://sonarcloud.io/summary/overall?id=tangilc_OC-P10_CICD%3Afront&branch=main)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tangilc_OC-P10_CICD:front&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tangilc_OC-P10_CICD:front)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=tangilc_OC-P10_CICD:front&metric=coverage)](https://sonarcloud.io/summary/new_code?id=tangilc_OC-P10_CICD:front)
 
+---
 
-# BobApp
+## 🤝 Contribuer
+Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou une pull request.
 
-Clone project:
-
-> git clone XXXXX
-
-## Front-end 
-
-Go inside folder the front folder:
-
-> cd front
-
-Install dependencies:
-
-> npm install
-
-Launch Front-end:
-
-> npm run start;
-
-### Docker
-
-Build the container:
-
-> docker build -t bobapp-front .  
-
-Start the container:
-
-> docker run -p 8080:8080 --name bobapp-front -d bobapp-front
-
-## Back-end
-
-Go inside folder the back folder:
-
-> cd back
-
-Install dependencies:
-
-> mvn clean install
-
-Launch Back-end:
-
->  mvn spring-boot:run
-
-Launch the tests:
-
-> mvn clean install
-
-### Docker
-
-Build the container:
-
-> docker build -t bobapp-back .  
-
-Start the container:
-
-> docker run -p 8080:8080 --name bobapp-back -d bobapp-back 
