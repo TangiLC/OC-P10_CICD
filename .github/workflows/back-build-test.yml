@@ -24,7 +24,7 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-        with: 
+        with:
           fetch-depth: 0
 
       - name: Set up Java & Maven
@@ -78,4 +78,6 @@ jobs:
             -Dsonar.token=${SONAR_TOKEN} \
             -Dsonar.projectKey=tangilc_OC-P10_CICD:back \
             -Dsonar.organization=tangilc \
-            -Dsonar.host.url=https://sonarcloud.io
+            -Dsonar.host.url=https://sonarcloud.io \
+            -Dsonar.coverage.jacoco.xmlReportPaths=target/site/jacoco/jacoco.xml \
+            -Dsonar.java.coveragePlugin=jacoco
