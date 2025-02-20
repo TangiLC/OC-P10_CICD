@@ -76,6 +76,6 @@ jobs:
           cd back
           mvn sonar:sonar \
             -Dsonar.token=${SONAR_TOKEN} \
-            -Dsonar.projectKey=TangiLC_OC-P10_CICD:back \
+            -Dsonar.projectKey=tangilc_OC-P10_CICD:back \
             -Dsonar.organization=tangilc \
             -Dsonar.host.url=https://sonarcloud.io

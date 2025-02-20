@@ -77,7 +77,7 @@ jobs:
         with:
           projectBaseDir: front
           args: >
-            -Dsonar.projectKey=TangiLC_OC-P10_CICD:front
+            -Dsonar.projectKey=tangilc_OC-P10_CICD:front
             -Dsonar.organization=tangilc
             -Dsonar.sources=src
             -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/test.ts,**/karma.conf.js,**/environments/**
