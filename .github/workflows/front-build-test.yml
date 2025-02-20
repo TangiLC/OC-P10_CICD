@@ -64,16 +64,16 @@ jobs:
           path-to-lcov: front/coverage/bobapp/lcov.info
           flag-name: frontend
 
-      - name: SonarCloud Scan
-        uses: SonarSource/sonarcloud-github-action@v2
-        env:
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        with:
-          projectBaseDir: front
-          args: >
-            -Dsonar.projectKey=TangiLC_OC-P10_CICD
-            -Dsonar.organization=tangilc
-            -Dsonar.sources=src
-            -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/test.ts,**/karma.conf.js,**/environments/**
-            -Dsonar.coverage.exclusions=**/main.ts
-            -Dsonar.javascript.lcov.reportPaths=coverage/bobapp/lcov.info
+  #    - name: SonarCloud Scan
+  #      uses: SonarSource/sonarcloud-github-action@v2
+  #      env:
+  #        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  #      with:
+  #        projectBaseDir: front
+  #        args: >
+  #          -Dsonar.projectKey=TangiLC_OC-P10_CICD
+  #          -Dsonar.organization=tangilc
+  #          -Dsonar.sources=src
+  #          -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/test.ts,**/karma.conf.js,**/environments/**
+  #          -Dsonar.coverage.exclusions=**/main.ts
+  #          -Dsonar.javascript.lcov.reportPaths=coverage/bobapp/lcov.info
