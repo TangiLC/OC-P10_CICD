@@ -83,4 +83,3 @@ jobs:
             -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/test.ts,**/karma.conf.js,**/environments/**
             -Dsonar.coverage.exclusions=**/main.ts
             -Dsonar.javascript.lcov.reportPaths=coverage/bobapp/lcov.info
-            -Dsonar.testExecutionReportPaths=coverage/bobapp/test-results.xml
