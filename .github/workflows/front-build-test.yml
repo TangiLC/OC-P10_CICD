@@ -1,16 +1,20 @@
-name: Frontend Build and Test
-run-name: ${{ github.actor }} | Frontend Build +Test
+name: Frontend Build and Test CI
+run-name: ${{ github.actor }} | Frontend Build and Test CI
 
 on:
   push:
     branches:
       - main
       - develop
+    #paths:
+    #  - 'front/**'
 
   pull_request:
     branches:
       - main
       - develop
+    #paths:
+    #  - 'front/**'
 
 jobs:
   frontend-build-test:
@@ -18,10 +22,12 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Set up Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "18"
 
@@ -63,17 +69,18 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           path-to-lcov: front/coverage/bobapp/lcov.info
           flag-name: frontend
+          parallel: true
 
-  #    - name: SonarCloud Scan
-  #      uses: SonarSource/sonarcloud-github-action@v2
-  #      env:
-  #        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-  #      with:
-  #        projectBaseDir: front
-  #        args: >
-  #          -Dsonar.projectKey=TangiLC_OC-P10_CICD
-  #          -Dsonar.organization=tangilc
-  #          -Dsonar.sources=src
-  #          -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/test.ts,**/karma.conf.js,**/environments/**
-  #          -Dsonar.coverage.exclusions=**/main.ts
-  #          -Dsonar.javascript.lcov.reportPaths=coverage/bobapp/lcov.info
+      - name: SonarCloud Scan
+        uses: Sonarsource/sonarqube-scan-action@v4
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        with:
+          projectBaseDir: front
+          args: >
+            -Dsonar.projectKey=tangilc_OC-P10_CICD:front
+            -Dsonar.organization=tangilc
+            -Dsonar.sources=src
+            -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/test.ts,**/karma.conf.js,**/environments/**
+            -Dsonar.coverage.exclusions=**/main.ts
+            -Dsonar.javascript.lcov.reportPaths=coverage/bobapp/lcov.info

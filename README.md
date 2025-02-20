@@ -1,6 +1,11 @@
-[![Coverage Status](https://coveralls.io/repos/github/TangiLC/OC-P10_CICD/badge.svg?branch=main)](https://coveralls.io/github/TangiLC/OC-P10_CICD?branch=main)
+### Back-end
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tangilc_OC-P10_CICD:back&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tangilc_OC-P10_CICD:back)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=tangilc_OC-P10_CICD:back&metric=coverage)](https://sonarcloud.io/summary/new_code?id=tangilc_OC-P10_CICD:back)
 
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=TangiLC_OC-P10_CICD&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=TangiLC_OC-P10_CICD)
+### Front-end
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=tangilc_OC-P10_CICD:front&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=tangilc_OC-P10_CICD:front)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=tangilc_OC-P10_CICD:front&metric=coverage)](https://sonarcloud.io/summary/new_code?id=tangilc_OC-P10_CICD:front)
+
 
 # BobApp
 
