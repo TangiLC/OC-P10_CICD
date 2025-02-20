@@ -3,7 +3,6 @@ import { AppComponent } from './app.component';
 import { JokesService } from './services/jokes.service';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { of } from 'rxjs';
-import { Joke } from './model/joke.model';
 
 describe('AppComponent', () => {
   let jokesServiceSpy: jasmine.SpyObj<JokesService>;
