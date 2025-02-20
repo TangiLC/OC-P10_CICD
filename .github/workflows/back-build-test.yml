@@ -6,10 +6,14 @@ on:
     branches:
       - main
       - develop
+    #paths:
+    #  - 'back/**'
   pull_request:
     branches:
       - main
       - develop
+    #paths:
+    #  - 'back/**'
 
 jobs:
   backend-build-test:
