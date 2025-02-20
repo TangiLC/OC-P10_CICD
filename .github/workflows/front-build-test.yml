@@ -80,8 +80,6 @@ jobs:
             -Dsonar.projectKey=tangilc_OC-P10_CICD:front
             -Dsonar.organization=tangilc
             -Dsonar.sources=src
-            -Dsonar.tests=src
-            -Dsonar.test.inclusions=**/*.spec.ts
             -Dsonar.exclusions=**/node_modules/**,**/*.spec.ts,**/test.ts,**/karma.conf.js,**/environments/**
             -Dsonar.coverage.exclusions=**/main.ts
             -Dsonar.javascript.lcov.reportPaths=coverage/bobapp/lcov.info
