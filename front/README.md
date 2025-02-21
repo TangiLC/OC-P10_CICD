@@ -37,17 +37,26 @@ ng serve
 
 ---
 
-1. **Alternativement, une image Docker est disponible sur DockerHub :**
+1. Alternativement, une **image Docker** est disponible sur DockerHub :
+#### **Pull des images dockerhub (dernière version)**
+Récupération des dernières versions des images Docker pour le backend et le frontend :
 ```bash
-docker pull tangilecadre/bobapp-front
+docker pull tangilecadre/bobapp-back:latest
+docker pull tangilecadre/bobapp-front:latest
+```
+Un fichier `docker-compose.yml` est présent à la racine du projet pour faciliter le déploiement.
+
+Pour lancer les conteneurs (frontend et backend) dans un projet conjoint :
+```bash
+docker-compose up -d
 ```
 
-2. **Lancer le conteneur Docker depuis l'image :**
-```bash
-docker run -p 8080:80 tangilecadre/bobapp-front
-```
+Le front-end de l'application sera disponible sur [http://localhost:4200](http://localhost:4200)
 
-L'application sera accessible sur [http://localhost:8080](http://localhost:8080).
+Pour arrêter les services et libérer les ports :
+```bash
+docker-compose down
+```
 
 ## 📚 Fonctionnalités
 

@@ -65,21 +65,28 @@ ng serve
 ```
 Frontend accessible sur [http://localhost:4200](http://localhost:4200)
 
-### **2. Utilisation via Docker (Production)**
+### 2. Utilisation avec Docker🐋 
+Assurez-vous que **Docker Desktop** est installé sur votre machine. Il inclut le moteur Docker et Docker Compose.
 
-#### **Backend**
+#### **Pull des images dockerhub (dernière version)**
+Récupération des dernières versions des images Docker pour le backend et le frontend :
 ```bash
-docker pull tangilecadre/bobapp-back
-docker run -p 8081:8080 tangilecadre/bobapp-back
+docker pull tangilecadre/bobapp-back:latest
+docker pull tangilecadre/bobapp-front:latest
+```
+Un fichier `docker-compose.yml` est présent à la racine du projet pour faciliter le déploiement.
+
+Pour lancer les conteneurs (frontend et backend) dans un projet conjoint :
+```bash
+docker-compose up -d
 ```
 
-#### **Frontend**
-```bash
-docker pull tangilecadre/bobapp-front
-docker run -p 8080:80 tangilecadre/bobapp-front
-```
+Le front-end de l'application sera disponible sur [http://localhost:4200](http://localhost:4200)
 
-L'application sera disponible sur [http://localhost:8080](http://localhost:8080)
+Pour arrêter les services et libérer les ports :
+```bash
+docker-compose down
+```
 
 ---
 

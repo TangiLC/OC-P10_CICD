@@ -34,13 +34,25 @@ mvn spring-boot:run
 ```
 4. L'API est disponible sur le port `8080` du localhost
 ---
-1. Alternativement, une image Docker est disponible sur DockerHub :
+1. Alternativement, une **image Docker** est disponible sur DockerHub :
+#### **Pull des images dockerhub (dernière version)**
+Récupération des dernières versions des images Docker pour le backend et le frontend :
 ```bash
-docker pull tangilecadre/bobapp-back
+docker pull tangilecadre/bobapp-back:latest
+docker pull tangilecadre/bobapp-front:latest
 ```
-2. Lancer le conteneur Docker depuis l'image :
+Un fichier `docker-compose.yml` est présent à la racine du projet pour faciliter le déploiement.
+
+Pour lancer les conteneurs (frontend et backend) dans un projet conjoint :
 ```bash
-docker run -p 8081:8080 tangilecadre/bobapp-back
+docker-compose up -d
+```
+
+Le front-end de l'application sera disponible sur [http://localhost:4200](http://localhost:4200)
+
+Pour arrêter les services et libérer les ports :
+```bash
+docker-compose down
 ```
 
 
