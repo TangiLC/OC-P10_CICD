@@ -5,7 +5,7 @@ services:
     image: tangilecadre/bobapp-front:latest
     container_name: bobapp-front
     ports:
-      - "4202:80"
+      - "4200:80"
     restart: unless-stopped
     networks:
       - bobapp-network
@@ -14,7 +14,7 @@ services:
     image: tangilecadre/bobapp-back:latest
     container_name: bobapp-back
     ports:
-      - "8081:4202"
+      - "8081:4200"
     restart: unless-stopped
     networks:
       - bobapp-network
