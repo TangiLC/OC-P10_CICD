@@ -6,15 +6,15 @@ on:
     branches:
       - main
       - develop
-    #paths:
-    #  - 'front/**'
+    paths:
+      - 'front/**'
 
   pull_request:
     branches:
       - main
       - develop
-    #paths:
-    #  - 'front/**'
+    paths:
+      - 'front/**'
 
 jobs:
   frontend-build-test:
@@ -51,7 +51,7 @@ jobs:
       - name: Frontend Test Report
         uses: phoenix-actions/test-reporting@v14
         id: front-test-report
-        if: success() || failure()
+        if: always()
         with:
           name: Frontend Tests
           path: front/coverage/bobapp/test-results.xml
@@ -62,14 +62,6 @@ jobs:
         with:
           name: front-coverage-report
           path: front/coverage/bobapp
-
-      - name: Publish coverage to Coveralls
-        uses: coverallsapp/github-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          path-to-lcov: front/coverage/bobapp/lcov.info
-          flag-name: frontend
-          parallel: true
 
       - name: SonarCloud Scan
         uses: Sonarsource/sonarqube-scan-action@v4

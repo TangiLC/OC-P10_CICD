@@ -6,14 +6,14 @@ on:
     branches:
       - main
       - develop
-    #paths:
-    #  - 'back/**'
+    paths:
+      - 'back/**'
   pull_request:
     branches:
       - main
       - develop
-    #paths:
-    #  - 'back/**'
+    paths:
+      - 'back/**'
 
 jobs:
   backend-build-test:
@@ -48,7 +48,7 @@ jobs:
       - name: Backend Test Report
         uses: phoenix-actions/test-reporting@v14
         id: back-test-report
-        if: success() || failure()
+        if: always()
         with:
           name: Backend Tests
           path: back/target/surefire-reports/*.xml
@@ -60,16 +60,6 @@ jobs:
         with:
           name: back-coverage-report
           path: back/target/site/jacoco/
-
-      - name: Publish coverage to Coveralls
-        if: always()
-        uses: coverallsapp/github-action@v2
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          file: back/target/site/jacoco/jacoco.xml
-          format: jacoco
-          flag-name: backend
-          parallel: true
 
       - name: SonarCloud Scan
         if: always()
