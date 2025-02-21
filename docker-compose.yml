@@ -6,15 +6,19 @@ services:
     container_name: bobapp-front
     ports:
       - "4200:80"
+    environment:
+      - BACKEND_URL=http://backend:8080
     restart: unless-stopped
     networks:
       - bobapp-network
+    depends_on:
+      - backend
 
   backend:
     image: tangilecadre/bobapp-back:latest
     container_name: bobapp-back
     ports:
-      - "8081:4200"
+      - "8081:8080"
     restart: unless-stopped
     networks:
       - bobapp-network
