@@ -29,9 +29,6 @@ jobs:
           context: ./front
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/bobapp-front:latest
-          platforms: linux/amd64,linux/arm64
-          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/bobapp-front:cache
-          cache-to: type=inline
 
       - name: Build and push Back-end
         uses: docker/build-push-action@v6
@@ -39,6 +36,4 @@ jobs:
           context: ./back
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/bobapp-back:latest
-          platforms: linux/amd64,linux/arm64
-          cache-from: type=registry,ref=${{ secrets.DOCKERHUB_USERNAME }}/bobapp-back:cache
-          cache-to: type=inline
+          
