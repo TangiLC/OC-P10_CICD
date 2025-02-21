@@ -83,5 +83,5 @@ Trois workflows sont configurés pour le front-end :
 
 ## 🤝 Contribuer
 
-Les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou une pull request.
+Toutes les contributions sont les bienvenues ! N'hésitez pas à ouvrir une issue ou une pull request.
 
