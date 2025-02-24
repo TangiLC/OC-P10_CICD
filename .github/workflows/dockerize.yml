@@ -3,8 +3,15 @@ run-name: ${{ github.actor }} | Docker CD
 
 on:
   workflow_run:
-    workflows: ["Frontend Build and Test CI"]
-    types: [completed]
+    workflows:
+      - "Frontend Build and Test CI"
+      - "Backend Build and Test CI"
+    types:
+      - completed
+
+concurrency:
+  group: docker-build-push
+  cancel-in-progress: true
 
 jobs:
   docker-build-push:
@@ -36,4 +43,3 @@ jobs:
           context: ./back
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/bobapp-back:latest
-          
