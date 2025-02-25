@@ -31,7 +31,6 @@ jobs:
         uses: docker/setup-buildx-action@v3
 
       - name: Build and push Front-end
-        if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.name == 'Frontend Build and Test CI' }}
         uses: docker/build-push-action@v6
         with:
           context: ./front
@@ -39,7 +38,6 @@ jobs:
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/bobapp-front:latest
 
       - name: Build and push Back-end
-        if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.name == 'Backend Build and Test CI' }}
         uses: docker/build-push-action@v6
         with:
           context: ./back
