@@ -1,4 +1,4 @@
-# 🎭 BobApp Frontend
+# 🎭 BobApp Frontend_
 
 Cette application Angular 14 est une **single-page app (SPA)** permettant d'afficher une blague aléatoire à chaque clic. Le projet est conteneurisé avec Docker, et les modifications sont supervisées par un pipeline CI/CD via GitHub Actions.
 
