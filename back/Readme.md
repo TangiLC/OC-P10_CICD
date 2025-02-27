@@ -1,4 +1,4 @@
-# 🎭 BobApp Backend_
+# 🎭 BobApp Backend
 
 Cette API permet d'afficher une blague aléatoire à chaque appel, tirée d'un fichier JSON situé dans les ressources de l'application. Le projet est développé en Java 11 avec Spring Boot, et utilise Docker pour la conteneurisation. Les modifications sont supervisées par un pipeline CI/CD via GitHub Actions.
 
